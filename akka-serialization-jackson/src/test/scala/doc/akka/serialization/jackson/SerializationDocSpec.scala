@@ -39,5 +39,13 @@ object SerializationDocSpec {
     }
     #//#migrations-conf-rename
   """
+
+  val configDateTime = """
+    #//#date-time
+    akka.serialization.jackson.serialization-features {
+      WRITE_DATES_AS_TIMESTAMPS = on
+    }
+    #//#date-time
+    """
 }
 // FIXME add real tests for the migrations, see EventMigrationTest.java in Lagom

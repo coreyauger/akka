@@ -221,3 +221,21 @@ than the following configuration are compressed with GZIP.
 @@snip [reference.conf](/akka-serialization-jackson/src/main/resources/reference.conf) { #compression }
 
 TODO: The binary formats are currently also compressed. That may change since it might not be needed for those.
+
+## Additional configuration
+
+Additional Jackson serialization features can be enabled/disabled in configuration. The default values from
+Jackson are used aside from the the following that are changed in Akka's default configuration.
+
+@@snip [reference.conf](/akka-serialization-jackson/src/main/resources/reference.conf) { #features }
+
+### Date/time format
+
+`WRITE_DATES_AS_TIMESTAMPS` is by default disabled, which means that date/time fields are serialized in
+ISO-8601 (rfc3339) `yyyy-MM-dd'T'HH:mm:ss.SSSZ` format instead of numeric arrays. This is better for
+interoperability but it is slower. If you don't need the ISO format for interoperability with external systems
+you can change the following configuration for better performance of date/time fields.
+
+@@snip [config](/akka-serialization-jackson/src/test/scala/doc/akka/serialization/jackson/SerializationDocSpec.scala) { #date-time }
+
+Jackson is still be able to deserialize the other format independent of this setting.
